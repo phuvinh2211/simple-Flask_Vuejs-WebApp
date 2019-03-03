@@ -5,7 +5,8 @@ Vue.component('get-tweets', {
       latest_tweets: [],
       tweet: {},
       input_valid: true,
-      no_output: false
+      no_output: false,
+      loading: false
     }
   },
 
@@ -14,12 +15,13 @@ Vue.component('get-tweets', {
 
       // If input is filled, then get request to the server
       if (!/\S/.test(this.user_screen) == '') {
-        this.input_valid = true
+        this.input_valid = true;
         const url = '/get_tweets/' + this.user_screen + '/';
-
+        this.loading = true;
         axios.get(url)
         .then (response => {
           this.latest_tweets = response.data;
+          this.loading = false;
         })
 
         // Check if user do not have any tweet response from server
@@ -35,12 +37,20 @@ Vue.component('get-tweets', {
     }
   },
 
+  computed: {
+    isLoading: function() {
+      return this.loading;
+    }
+  },
+
   template: `
     <div class="center user-input-wrapper">
       <input v-model="user_screen" class="user-input" placeholder="Typing your twitter handle or someone here...">
 
       <div class="submit-button-wrapper">
-        <button v-on:click="fetchTweets" class="submit-button">tweets</button>
+        <button :disabled="isLoading" v-on:click="fetchTweets" class="submit-button">
+          {{ isLoading ? '...' : 'tweets' }}
+        </button>
       </div>
 
       <div v-if="!input_valid" class="aler-error">Oop!!! You did not type anything above.</div>
