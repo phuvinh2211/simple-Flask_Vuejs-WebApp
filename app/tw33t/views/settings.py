@@ -1,0 +1,8 @@
+'''
+You need to set up Twitter API key to make a request
+'''
+
+TOKEN = '2943725136-AmEfTI8OavSqqRe39KT3VWoOuCql7XTqIcvr7Nv'
+TOKEN_SECRET = 'dBP7ka7KTvCN2aIOjFS3UubNpK1jH1SHfu4D4xbmbJt1P'
+CONSUMER_KEY = 'efyfLIfGMOn5F0Hy0nu2B3dqi'
+CONSUMER_SECRET = 'y60laTqzXEpfvMYwYL7ejOCc1C6JLMTTz8AcTU9TTdoS3qPbyV'

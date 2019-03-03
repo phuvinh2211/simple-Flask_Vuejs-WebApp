@@ -4,7 +4,8 @@ Vue.component('get-tweets', {
       user_screen: '',
       latest_tweets: [],
       tweet: {},
-      input_valid: true
+      input_valid: true,
+      no_output: false
     }
   },
 
@@ -20,6 +21,11 @@ Vue.component('get-tweets', {
         .then (response => {
           this.latest_tweets = response.data;
         })
+
+        // Check if user do not have any tweet response from server
+        if (this.latest_tweets.length == 0){
+          this.no_output = true;
+        }
       }
 
       // If no, prompt the message error back to user
@@ -38,7 +44,7 @@ Vue.component('get-tweets', {
       </div>
 
       <div v-if="!input_valid" class="aler-error">Oop!!! You did not type anything above.</div>
-      <div v-else>
+      <div v-else-if="latest_tweets.length > 0">
         <div class="tweet-list-wrapper">
           <div v-for="tweet in latest_tweets">
             <div class="tweet-li-date"> {{ tweet.creation_date }} </div>
@@ -46,6 +52,7 @@ Vue.component('get-tweets', {
           </div>
         </div>
       </div>
+      <div v-else-if="no_output" class="aler-error">Oop!!! This user do not have any tweets.</div>
     </div>
     `
 })
