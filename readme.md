@@ -31,5 +31,3 @@ docker-compose up web
 2. Get some latest tweets from @CasaCubi
 
 ![Result Screen](https://i.imgur.com/CAytfyk.png)
-
-This project is derived from: https://github.com/CubiCasa/developer-review
